@@ -7,7 +7,6 @@ Productive [C#](https://docs.microsoft.com/en-us/dotnet/articles/csharp/csharp) 
 ## Roadmap
 - Documentation
 - Improve the command parser
-- Add Test project to solution
 - Dependency Injection
 - Provide Examples
 
