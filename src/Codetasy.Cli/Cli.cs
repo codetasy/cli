@@ -18,7 +18,7 @@ namespace Codetasy.Cli
         {           
             commands = new Dictionary<string, Action<CliDictionary<string, string>>>();
             Arguments = args;
-            commandArguments = ArgumentsToDictionary();
+            commandArguments = new CliArguments().ToDictionary(Arguments);
         }     
 
         public void Register(string commandName, Action<CliDictionary<string, string>> command) 
@@ -53,55 +53,6 @@ namespace Codetasy.Cli
         Action<CliDictionary<string, string>> GetCommandFromArgs()
         {
             return commands.GetValueOrDefault(Arguments.FirstOrDefault());
-        }
-
-        /// <summary>
-        /// Parse and returns the arguments as Dictionary
-        /// e.g.["--file=/some/file.txt"] stored as {Key="file", Value="/some/file.txt"}
-        /// </summary>
-        /// <returns></returns>
-        CliDictionary<string, string> ArgumentsToDictionary() 
-        {
-            var argsDic = new CliDictionary<string, string>();
-            
-            // avoiding to add the first argument since thats the command name
-            for (int i = 1; i < Arguments.Count(); i++)
-            {
-                var arg = Arguments[i];
-                KeyValuePair<string, string> nameValue;
-                argsDic.AddOrUpdate(TryParseNameValueArg(arg, out nameValue) ? nameValue : ParseFlagArg(arg));
-            }           
-
-            return argsDic;
-        }
-
-        private bool TryParseNameValueArg(string arg, out KeyValuePair<string, string> nameValue, char separator = '=')
-        {
-            try
-            {
-                var nv = arg.Split(separator);
-                if (nv.Count() > 0)
-                {
-                    nameValue = new KeyValuePair<string, string>(RemoveTwoInitialHyphens(nv[0]), nv[1]);
-                    return true;
-                }
-            }
-            catch
-            {
-                // TODO: log here                
-            }
-
-            return false;                    
-        }
-
-        private KeyValuePair<string, string> ParseFlagArg(string arg)
-        {
-            return new KeyValuePair<string, string>(RemoveTwoInitialHyphens(arg), true.ToString());
-        }
-
-        private string RemoveTwoInitialHyphens(string argName)
-        {
-            return argName.StartsWith("--") ? argName.Remove(0, 2) : argName;
         }
     }
 }
