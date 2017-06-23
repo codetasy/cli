@@ -16,6 +16,14 @@ namespace Codetasy.Cli.Tests
         }
 
         [Fact]
+        public void CanLoadMultipleCommands()
+        {
+            var commands = new CommandLoader().LoadCommandsFrom(this);
+            Assert.True(commands["hello"] != null);
+            Assert.True(commands["goodbye"] != null);
+        }
+
+        [Fact]
         public void CanRunHelloCommand()
         {
             using (StringWriter sw = new StringWriter())
