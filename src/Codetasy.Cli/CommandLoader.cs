@@ -1,19 +1,17 @@
 using System;
-using System.Collections.Generic;
-using Codetasy.Cli;
 using System.Reflection;
 using System.Linq;
-using System.IO;
+using System.Collections.Generic;
 
 namespace Codetasy.Cli
 {
-	public class CommandLoader
+    public class CommandLoader
 	{
 		public Dictionary<string, Action<Dictionary<string, string>>> Commands { get; set; }		
 
 		public CommandLoader()
 		{
-            Commands = new System.Collections.Generic.Dictionary<string, Action<System.Collections.Generic.Dictionary<string, string>>>();
+            Commands = new Dictionary<string, Action<Dictionary<string, string>>>();
 		}
 
 		public Dictionary<string, Action<Dictionary<string, string>>> LoadCommandsFrom(object invoker)
