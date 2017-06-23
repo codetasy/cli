@@ -9,24 +9,24 @@ namespace Codetasy.Cli
 {
     public class Cli
     {
-        Dictionary<string, Action<CliDictionary<string, string>>> commands;
-        CliDictionary<string, string> commandArguments;       
+        Dictionary<string, Action<Dictionary<string, string>>> commands;
+        Dictionary<string, string> commandArguments;       
 
         public string[] Arguments { get; private set; }
 
         public Cli(string[] args)
         {           
-            commands = new Dictionary<string, Action<CliDictionary<string, string>>>();
+            commands = new Dictionary<string, Action<Dictionary<string, string>>>();
             Arguments = args;
             commandArguments = new CliArguments().ToDictionary(Arguments);
         }     
 
-        public void Register(string commandName, Action<CliDictionary<string, string>> command) 
+        public void Register(string commandName, Action<Dictionary<string, string>> command) 
         {
             commands.Add(commandName, command);
         }
 
-        public void Register(Dictionary<string, Action<CliDictionary<string, string>>> cmds) 
+        public void Register(Dictionary<string, Action<Dictionary<string, string>>> cmds) 
         {
             commands = cmds;
         }       
@@ -44,13 +44,13 @@ namespace Codetasy.Cli
             }
         }
 
-        public void Execute(Dictionary<string, Action<CliDictionary<string, string>>> cmds)
+        public void Execute(Dictionary<string, Action<Dictionary<string, string>>> cmds)
         {
             Register(cmds);
             Execute();
         }
 
-        Action<CliDictionary<string, string>> GetCommandFromArgs()
+        Action<Dictionary<string, string>> GetCommandFromArgs()
         {
             return commands.GetValueOrDefault(Arguments.FirstOrDefault());
         }
