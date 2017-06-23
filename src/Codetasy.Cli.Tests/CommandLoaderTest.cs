@@ -14,5 +14,19 @@ namespace Codetasy.Cli.Tests
             var commands = new CommandLoader().LoadCommandsFrom(this);
             Assert.True(commands["hello"] != null);
         }
+
+        [Fact]
+        public void CanRunHelloCommand()
+        {
+            using (StringWriter sw = new StringWriter())
+            {
+                Console.SetOut(sw);
+
+                 var commands = new CommandLoader().LoadCommandsFrom(this);
+                 commands["hello"].Invoke(null);
+
+                 Assert.Equal("Output from hello command!", sw.ToString());
+            }
+        }
     }
 }
