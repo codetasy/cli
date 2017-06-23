@@ -13,7 +13,7 @@ namespace Codetasy.Cli
 
 		public CommandLoader()
 		{
-			Commands = new Dictionary<string, Action<Dictionary<string, string>>>();
+            Commands = new System.Collections.Generic.Dictionary<string, Action<System.Collections.Generic.Dictionary<string, string>>>();
 		}
 
 		public Dictionary<string, Action<Dictionary<string, string>>> LoadCommandsFrom(object invoker)
@@ -31,8 +31,8 @@ namespace Codetasy.Cli
 					var attribute = methodInfo.GetCustomAttributes(typeof(CommandAttribute)).FirstOrDefault();
 					if (attribute != null)
 					{
-						var action = methodInfo.CreateDelegate(typeof(Action<Dictionary<string, string>>), null);
-						Commands.Add((attribute as CommandAttribute).Name, (Action<Dictionary<string, string>>)action);
+						var action = methodInfo.CreateDelegate(typeof(Action<System.Collections.Generic.Dictionary<string, string>>), null);
+                        Commands.Add((attribute as CommandAttribute).Name, (Action<System.Collections.Generic.Dictionary<string, string>>)action);
 					}
 				}
 			}

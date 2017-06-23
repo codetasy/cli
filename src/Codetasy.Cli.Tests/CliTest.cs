@@ -15,7 +15,7 @@ namespace Codetasy.Cli.Tests
 
             var arguments = new [] {"hello"};
 
-            var commands = new Dictionary<string, Action<CliDictionary<string, string>>>();
+            var commands = new Dictionary<string, Action<Dictionary<string, string>>>();
             commands.Add("hello", args =>
             {
                 executed = true;
@@ -33,7 +33,7 @@ namespace Codetasy.Cli.Tests
 
             var arguments = new [] {"hello", "name=Frodo"};
 
-            var commands = new Dictionary<string, Action<CliDictionary<string, string>>>();
+            var commands = new Dictionary<string, Action<Dictionary<string, string>>>();
             commands.Add("hello", args =>
             {
                 message = $"Hello {args["name"]}";
@@ -51,7 +51,7 @@ namespace Codetasy.Cli.Tests
 
             var arguments = new [] {"hello", "--name=\"Frodo Baggins\"", "--region=\"The Shire\""};
 
-            var commands = new Dictionary<string, Action<CliDictionary<string, string>>>();
+            var commands = new Dictionary<string, Action<Dictionary<string, string>>>();
             commands.Add("hello", args =>
             {
                 message = $"Hello {args["name"]} from {args["region"]}";

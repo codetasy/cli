@@ -11,9 +11,9 @@ namespace Codetasy.Cli
         /// e.g.["--file=/some/file.txt"] stored as {Key="file", Value="/some/file.txt"}
         /// </summary>
         /// <returns></returns>
-        public CliDictionary<string, string> ToDictionary(string[] arguments) 
+        public Dictionary<string, string> ToDictionary(string[] arguments) 
         {
-            var argsDic = new CliDictionary<string, string>();
+            var argsDic = new Dictionary<string, string>();
             
             // avoiding to add the first argument since thats the command name
             for (int i = 1; i < arguments.Count(); i++)
