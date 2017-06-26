@@ -16,7 +16,7 @@ namespace Codetasy.Cli.Tests
                 Console.SetOut(sw);
 
                 var arguments = new [] {"goodbye", "name=Frodo"};
-                new Cli(arguments).Execute(new CommandLoader().LoadCommandsFrom(this));
+                new Cli(arguments).Run(this);
 
                 Assert.Equal("Bye Frodo!", sw.ToString());
             }
