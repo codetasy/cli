@@ -1,4 +1,4 @@
-# Codetasy CLI
+# C# CLI
 Productive [C#](https://docs.microsoft.com/en-us/dotnet/articles/csharp/csharp) CLI Solution 
 
 ## Install pre-requisites
